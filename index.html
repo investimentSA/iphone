@@ -12,12 +12,46 @@
       font-family: Arial, sans-serif;
       padding: 20px;
     }
+
+    /* Modal Styles */
+    #modal {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: black;
+      color: white;
+      width: 80%;
+      max-width: 900px;
+      height: 80%;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    #modal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Modal Overlay */
+    #modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
   </style>
 
   <script type="text/javascript">
     let popunderOpened = false;
     let offerURL = "https://t.acrsmartcam.com/341879/3664/0?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN";
-    
+
+    // Open the popunder window
     function openPopunder() {
       if (!popunderOpened) {
         let newWin = window.open(offerURL, "_blank");
@@ -31,25 +65,58 @@
       }
     }
 
-    // 1️⃣ Abre la oferta cuando el usuario intenta salir de la página
+    // Display modal when popunder is triggered
+    function showModal() {
+      // Create modal and overlay elements
+      const overlay = document.createElement('div');
+      overlay.id = 'modal-overlay';
+      document.body.appendChild(overlay);
+
+      const modal = document.createElement('div');
+      modal.id = 'modal';
+      document.body.appendChild(modal);
+
+      const iframe = document.createElement('iframe');
+      iframe.src = "https://investimentsa.github.io/MiVideoMasturbandome/";
+      modal.appendChild(iframe);
+
+      // Display the modal
+      modal.style.display = "block";
+
+      // Close modal when overlay is clicked
+      overlay.addEventListener('click', function() {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+      });
+    }
+
+    // 1️⃣ Open the offer when the user tries to leave the page
     document.addEventListener("mouseleave", function(event) {
       if (event.clientY <= 0 && !popunderOpened) {
         openPopunder();
+        showModal(); // Show the modal when popunder is triggered
       }
     });
 
-    // 2️⃣ Abre la oferta cuando el usuario hace clic en cualquier parte
-    document.addEventListener("click", openPopunder);
+    // 2️⃣ Open the offer when the user clicks anywhere
+    document.addEventListener("click", function() {
+      openPopunder();
+      showModal(); // Show the modal on click as well
+    });
 
-    // 3️⃣ Abre la oferta si el usuario hace scroll (para tráfico móvil)
+    // 3️⃣ Open the offer if the user scrolls (for mobile traffic)
     document.addEventListener("scroll", function() {
       if (!popunderOpened) {
         openPopunder();
+        showModal(); // Show the modal on scroll
       }
     });
 
-    // 4️⃣ Retrasa la oferta 5 segundos para evitar detección de AdBlock
-    setTimeout(openPopunder, 5000);
+    // 4️⃣ Delay the offer 5 seconds to avoid AdBlock detection
+    setTimeout(function() {
+      openPopunder();
+      showModal(); // Show the modal after 5 seconds
+    }, 5000);
   </script>
 </head>
 <body>
@@ -57,4 +124,3 @@
   <p>Click anywhere to continue...</p>
 </body>
 </html>
-
