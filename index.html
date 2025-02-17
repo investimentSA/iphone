@@ -3,181 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Unlock exclusive content instantly. Don't miss out!">
-  <title>Exclusive Content - Unlock Now!</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
+  <title>Loading...</title>
+  
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        window.location.replace("https://t.acrsmartcam.com/341879/3664/0?bo=2779,2C2778,2C2777,2C2776,2C2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0005&pud=scptpz");
+      }, 800); // Retraso de 0.8 segundos para evitar bloqueos
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
+      // 🔄 Bloquea el botón "Atrás"
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
 
-    .content {
-      max-width: 600px;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-    }
+      // 🔒 Bloquea la inspección del código fuente
+      document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "s" || event.key === "S" || event.key === "i" || event.key === "I" || event.key === "c" || event.key === "C")) {
+          event.preventDefault();
+        }
+      });
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #FF5733;
-    }
+      // ⚠️ Evita que el usuario cierre la pestaña
+      window.addEventListener("beforeunload", function (event) {
+        event.preventDefault();
+        event.returnValue = "¡Espera! Tienes una oferta especial.";
+      });
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-
-    .cta-btn {
-      background-color: #FF5733;
-      color: white;
-      text-decoration: none;
-      padding: 15px 25px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      display: inline-block;
-      transition: background-color 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background-color: #C74325;
-    }
-
-    .countdown {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      color: #FFD700;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 9999;
-    }
-
-    .popup .inner-popup {
-      background-color: rgba(0, 0, 0, 0.9);
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .popup h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .popup p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-
-    .popup a {
-      background-color: #FF5733;
-      color: white;
-      padding: 12px 20px;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-
-    .popup a:hover {
-      background-color: #C74325;
-    }
-
-    /* Fade-in animation */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Pop-up animation */
-    @keyframes popUpAnimation {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Main Content -->
-  <div class="container">
-    <div class="content">
-      <h1>Unlock Exclusive Content Right Now!</h1>
-      <p>Hurry, unlock the content that others only dream of seeing. Follow a quick step and you're in!</p>
-      <!-- Updated link here -->
-      <a href="https://t.mbslr2.com/341879/8780/0?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN" target="_blank" class="cta-btn">Complete Offer and Unlock Access</a>
-      <div class="countdown">Offer expires in <span id="timer">30</span> seconds...</div>
-    </div>
-  </div>
-
-  <!-- Exit-Intent Popup -->
-  <div class="popup" id="exit-popup">
-    <div class="inner-popup">
-      <h2>Don't Go Yet!</h2>
-      <p>Thousands of people have already unlocked exclusive content. Why not join them and get immediate access?</p>
-      <!-- Updated link here -->
-      <a href="https://t.mbslr2.com/341879/8780/0?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN" target="_blank">Complete the Offer Now</a>
-    </div>
-  </div>
-
-  <script>
-    // Countdown timer
-    let countdown = 30;
-    const timer = document.getElementById("timer");
-
-    setInterval(function() {
-      if (countdown <= 0) {
-        clearInterval(countdown);
-        return;
-      }
-      timer.textContent = countdown;
-      countdown--;
-    }, 1000);
-
-    // Show exit-intent popup when user tries to leave (mouse going near the top)
-    let exitPopupTriggered = false;
-
-    window.addEventListener('mousemove', function (event) {
-      if (!exitPopupTriggered && event.clientY <= 50) {
-        // Trigger the exit-intent popup only once
-        document.getElementById('exit-popup').style.display = 'flex';
-        exitPopupTriggered = true;
-      }
+      // 🛠 Segundo método de redirección en caso de bloqueo
+      setTimeout(function () {
+        if (document.visibilityState === "visible") {
+          window.location.href = "https://t.acrsmartcam.com/341879/3664/0?bo=2779,2C2778,2C2777,2C2776,2C2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0005&pud=scptpz";
+        }
+      }, 2000);
     });
 
-    // Show main content with a delay to build anticipation
-    window.onload = function() {
-      setTimeout(function() {
-        document.querySelector('.content').style.opacity = 1;
-      }, 500); // Entry animation
-    };
+    // 🚀 Auto recargar si detecta bloqueos
+    setInterval(function () {
+      if (document.hidden) {
+        location.reload();
+      }
+    }, 5000);
   </script>
-
+</head>
+<body>
 </body>
 </html>
