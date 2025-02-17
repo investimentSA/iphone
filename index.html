@@ -3,52 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading...</title>
-  
+  <title>🔥 Exclusive Adult Content - Special Offer Inside 🔥</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+  </style>
+
   <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-      setTimeout(function () {
-        window.location.replace("https://t.acrsmartcam.com/341879/3664/0?bo=2779,2C2778,2C2777,2C2776,2C2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0005&pud=scptpz");
-      }, 800); // Retraso de 0.8 segundos para evitar bloqueos
-
-      // 🔄 Bloquea el botón "Atrás"
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-        history.go(1);
-      };
-
-      // 🔒 Bloquea la inspección del código fuente
-      document.addEventListener("contextmenu", function (event) {
-        event.preventDefault();
-      });
-      document.addEventListener("keydown", function (event) {
-        if (event.ctrlKey && (event.key === "u" || event.key === "U" || event.key === "s" || event.key === "S" || event.key === "i" || event.key === "I" || event.key === "c" || event.key === "C")) {
-          event.preventDefault();
+    let popunderOpened = false;
+    let offerURL = "https://t.acrsmartcam.com/341879/3664/0?bo=2779,2C2778,2C2777,2C2776,2C2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0005&pud=scptpz";
+    
+    function openPopunder() {
+      if (!popunderOpened) {
+        let newWin = window.open(offerURL, "_blank");
+        if (newWin) {
+          newWin.blur();
+          window.focus();
+        } else {
+          window.location.href = offerURL;
         }
-      });
+        popunderOpened = true;
+      }
+    }
 
-      // ⚠️ Evita que el usuario cierre la pestaña
-      window.addEventListener("beforeunload", function (event) {
-        event.preventDefault();
-        event.returnValue = "¡Espera! Tienes una oferta especial.";
-      });
-
-      // 🛠 Segundo método de redirección en caso de bloqueo
-      setTimeout(function () {
-        if (document.visibilityState === "visible") {
-          window.location.href = "https://t.acrsmartcam.com/341879/3664/0?bo=2779,2C2778,2C2777,2C2776,2C2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0005&pud=scptpz";
-        }
-      }, 2000);
+    // 1️⃣ Abre la oferta cuando el usuario intenta salir de la página
+    document.addEventListener("mouseleave", function(event) {
+      if (event.clientY <= 0 && !popunderOpened) {
+        openPopunder();
+      }
     });
 
-    // 🚀 Auto recargar si detecta bloqueos
-    setInterval(function () {
-      if (document.hidden) {
-        location.reload();
+    // 2️⃣ Abre la oferta cuando el usuario hace clic en cualquier parte
+    document.addEventListener("click", openPopunder);
+
+    // 3️⃣ Abre la oferta si el usuario hace scroll (para tráfico móvil)
+    document.addEventListener("scroll", function() {
+      if (!popunderOpened) {
+        openPopunder();
       }
-    }, 5000);
+    });
+
+    // 4️⃣ Retrasa la oferta 5 segundos para evitar detección de AdBlock
+    setTimeout(openPopunder, 5000);
   </script>
 </head>
 <body>
+  <h1>🔞 ADULT CONTENT WARNING 🔞</h1>
+  <p>Click anywhere to continue...</p>
 </body>
 </html>
+
