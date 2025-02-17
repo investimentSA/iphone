@@ -3,234 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Exclusive live stream. Complete a brief survey to watch the full video.">
-  <title>Exclusive Live Stream</title>
+  <meta name="description" content="Unlock exclusive content instantly. Don't miss out!">
+  <title>Exclusive Content - Unlock Now!</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
       margin: 0;
-      background-color: #000;
-      overflow: hidden; /* Remove scroll */
+      padding: 0;
+      overflow: hidden;
     }
-    .video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+
+    .container {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #000;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      pointer-events: none; /* Prevent interaction with the video */
-    }
-    /* Overlay with message */
-    .overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 600px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-size: 1.5rem;
+      height: 100vh;
       text-align: center;
-      border-radius: 10px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .overlay.show {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .overlay h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    .overlay p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: red;
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 20px;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      transition: background 0.3s ease-in-out;
-    }
-    .cta-btn:hover {
-      background: darkred;
+      padding: 20px;
     }
 
-    /* Exit Intent Popup */
-    #exit-popup {
+    .content {
+      max-width: 600px;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #FF5733;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-btn {
+      background-color: #FF5733;
+      color: white;
+      text-decoration: none;
+      padding: 15px 25px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #C74325;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #FFD700;
+    }
+
+    .popup {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.7);
       color: white;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding-top: 20%;
       z-index: 9999;
     }
-    #exit-popup h2 {
+
+    .popup .inner-popup {
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .popup h2 {
       font-size: 2rem;
       margin-bottom: 20px;
     }
-    #exit-popup p {
-      font-size: 1rem;
+
+    .popup p {
+      font-size: 1.2rem;
       margin-bottom: 20px;
     }
-    #exit-popup a {
-      color: white;
+
+    .popup a {
       background-color: #FF5733;
-      padding: 10px 20px;
-      text-decoration: none;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1.1rem;
       border-radius: 5px;
+      text-decoration: none;
     }
-    #exit-popup a:hover {
+
+    .popup a:hover {
       background-color: #C74325;
     }
 
-    /* Promo Banner at the top */
-    .promo-banner {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      font-size: 1.5rem;
-      z-index: 10000;
-    }
-    .promo-banner a {
-      color: #FF5733;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .promo-banner a:hover {
-      color: #C74325;
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    /* Countdown Timer for urgency */
-    .countdown-timer {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 1.5rem;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 10px;
+    /* Pop-up animation */
+    @keyframes popUpAnimation {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Promo Banner -->
-  <div class="promo-banner">
-    <p>Complete a quick survey to unlock exclusive access to the live stream instantly!</p>
-    <a href="https://eradictrkr.com/pauldev" target="_blank">Take Survey Now</a>
-  </div>
-
-  <!-- Video Container -->
-  <div class="video-container">
-    <!-- Iframe with the video (modified to hide controls) -->
-    <iframe 
-      id="videoIframe"
-      width="640" 
-      height="360" 
-      frameborder="0" 
-      src="https://mega.nz/embed/dfMBUJLS#JyrI7a3Iafxb7tVO5QARhUFaWx6eBM3PWQ8MUaENYS0" 
-      allow="autoplay; fullscreen" 
-      allowfullscreen>
-    </iframe>
-
-    <!-- Overlay with message -->
-    <div class="overlay" id="overlay">
-      <h1>Attention! Exclusive Content</h1>
-      <p>This live stream is restricted to users over 18. Complete a quick survey to continue watching.</p>
-      <p><strong>Only 5 minutes left to unlock!</strong></p>
-      <a href="https://eradictrkr.com/pauldev" class="cta-btn" target="_blank">Complete Survey and Watch</a>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="content">
+      <h1>Unlock Exclusive Content Right Now!</h1>
+      <p>Hurry, unlock the content that others only dream of seeing. Follow a quick step and you're in!</p>
+      <a href="https://eradictrkr.com/pauldev" target="_blank" class="cta-btn">Complete Offer and Unlock Access</a>
+      <div class="countdown">Offer expires in <span id="timer">30</span> seconds...</div>
     </div>
   </div>
 
-  <!-- Countdown Timer for urgency -->
-  <div class="countdown-timer">
-    <p>Time Left: <span id="timer"></span></p>
+  <!-- Exit-Intent Popup -->
+  <div class="popup" id="exit-popup">
+    <div class="inner-popup">
+      <h2>Don't Go Yet!</h2>
+      <p>Thousands of people have already unlocked exclusive content. Why not join them and get immediate access?</p>
+      <a href="https://eradictrkr.com/pauldev" target="_blank">Complete the Offer Now</a>
+    </div>
   </div>
 
-  <!-- Exit Intent Popup -->
-  <div id="exit-popup">
-    <h2>Wait! Don’t Miss Out!</h2>
-    <p>Complete a quick survey to unlock exclusive access to the live stream you’ve been waiting for.</p>
-    <p>Limited time offer – unlock the stream now!</p>
-    <a href="https://eradictrkr.com/pauldev" target="_blank">Unlock Now & Watch Live</a>
-  </div>
-
-  <!-- JavaScript to handle the video, overlay and exit intent popup -->
   <script>
-    const overlay = document.getElementById('overlay');
-    const iframe = document.getElementById('videoIframe');
-    const exitPopup = document.getElementById('exit-popup');
-    const countdownTimer = document.getElementById('timer');
+    // Countdown timer
+    let countdown = 30;
+    const timer = document.getElementById("timer");
 
-    // Function to start the video automatically
-    function startVideo() {
-      setTimeout(() => {
-        // Play the video automatically
-        iframe.src = "https://mega.nz/embed/dfMBUJLS#JyrI7a3Iafxb7tVO5QARhUFaWx6eBM3PWQ8MUaENYS0";
-      }, 0);  // Starts immediately
-    }
-
-    // Function to show the overlay after 5 seconds
-    function showOverlay() {
-      setTimeout(() => {
-        overlay.classList.add('show');
-      }, 5000);  // Show overlay after 5 seconds
-    }
-
-    // Countdown Timer
-    let countdownDate = new Date().getTime() + 5 * 60 * 1000; // Set to 5 minutes from now
-    let x = setInterval(function() {
-      let now = new Date().getTime();
-      let distance = countdownDate - now;
-
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownTimer.innerHTML = minutes + "m " + seconds + "s ";
-
-      if (distance < 0) {
-        clearInterval(x);
-        countdownTimer.innerHTML = "EXPIRED";
+    setInterval(function() {
+      if (countdown <= 0) {
+        clearInterval(countdown);
+        return;
       }
+      timer.textContent = countdown;
+      countdown--;
     }, 1000);
 
-    // Show the exit intent popup when user tries to leave the page
-    document.addEventListener('mouseleave', function (event) {
-      if (!event.toElement && !event.relatedTarget) {
-        exitPopup.style.display = 'block'; // Show exit intent popup
+    // Show exit-intent popup when user tries to leave (mouse going near the top)
+    let exitPopupTriggered = false;
+
+    window.addEventListener('mousemove', function (event) {
+      if (!exitPopupTriggered && event.clientY <= 50) {
+        // Trigger the exit-intent popup only once
+        document.getElementById('exit-popup').style.display = 'flex';
+        exitPopupTriggered = true;
       }
     });
 
-    // Start functions
-    startVideo();
-    showOverlay();
+    // Show main content with a delay to build anticipation
+    window.onload = function() {
+      setTimeout(function() {
+        document.querySelector('.content').style.opacity = 1;
+      }, 500); // Entry animation
+    };
   </script>
 
 </body>
