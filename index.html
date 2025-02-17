@@ -104,9 +104,48 @@
     #exit-popup a:hover {
       background-color: #C74325;
     }
+
+    /* Promo Banner at the top */
+    .promo-banner {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 1.5rem;
+      z-index: 10000;
+    }
+    .promo-banner a {
+      color: #FF5733;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .promo-banner a:hover {
+      color: #C74325;
+    }
+
+    /* Countdown Timer for urgency */
+    .countdown-timer {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 1.5rem;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <p>Complete a quick survey to unlock exclusive access to the live stream instantly!</p>
+    <a href="https://eradictrkr.com/pauldev" target="_blank">Take Survey Now</a>
+  </div>
 
   <!-- Video Container -->
   <div class="video-container">
@@ -124,24 +163,31 @@
     <!-- Overlay with message -->
     <div class="overlay" id="overlay">
       <h1>Attention! Exclusive Content</h1>
-      <p>This video is restricted to those over 18. Complete a brief survey to continue watching the live stream.</p>
-      <a href="https://eradictrkr.com/pauldev" class="cta-btn" target="_blank">Complete Survey and Watch Live</a>
+      <p>This live stream is restricted to users over 18. Complete a quick survey to continue watching.</p>
+      <p><strong>Only 5 minutes left to unlock!</strong></p>
+      <a href="https://eradictrkr.com/pauldev" class="cta-btn" target="_blank">Complete Survey and Watch</a>
     </div>
   </div>
 
-  <!-- Exit Intent Popup -->
-<div id="exit-popup">
-  <h2>Wait! Don’t Leave Yet...</h2>
-  <p>Almost there! Complete a short survey to unlock full access to this exclusive live stream.</p>
-  <a href="https://eradictrkr.com/pauldev" target="_blank">Complete Survey and Unlock Stream</a>
-</div>
+  <!-- Countdown Timer for urgency -->
+  <div class="countdown-timer">
+    <p>Time Left: <span id="timer"></span></p>
+  </div>
 
+  <!-- Exit Intent Popup -->
+  <div id="exit-popup">
+    <h2>Wait! Don’t Miss Out!</h2>
+    <p>Complete a quick survey to unlock exclusive access to the live stream you’ve been waiting for.</p>
+    <p>Limited time offer – unlock the stream now!</p>
+    <a href="https://eradictrkr.com/pauldev" target="_blank">Unlock Now & Watch Live</a>
+  </div>
 
   <!-- JavaScript to handle the video, overlay and exit intent popup -->
   <script>
     const overlay = document.getElementById('overlay');
     const iframe = document.getElementById('videoIframe');
     const exitPopup = document.getElementById('exit-popup');
+    const countdownTimer = document.getElementById('timer');
 
     // Function to start the video automatically
     function startVideo() {
@@ -157,6 +203,23 @@
         overlay.classList.add('show');
       }, 5000);  // Show overlay after 5 seconds
     }
+
+    // Countdown Timer
+    let countdownDate = new Date().getTime() + 5 * 60 * 1000; // Set to 5 minutes from now
+    let x = setInterval(function() {
+      let now = new Date().getTime();
+      let distance = countdownDate - now;
+
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownTimer.innerHTML = minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(x);
+        countdownTimer.innerHTML = "EXPIRED";
+      }
+    }, 1000);
 
     // Show the exit intent popup when user tries to leave the page
     document.addEventListener('mouseleave', function (event) {
