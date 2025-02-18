@@ -78,37 +78,74 @@
       }
     }
 
-    // Redirigir después de un tiempo de espera
-    function redirectToOffer() {
-      window.location.href = "https://t.acrsmartcam.com/341879/2994/optimized?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0016&aff_id=1&transaction_id=postitial";
+    // Redirigir a las cuatro pestañas
+    function openMultipleTabs() {
+      // Abrir la primera pestaña (la oferta principal)
+      window.open("https://t.acrsmartcam.com/341879/2994/optimized?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0016&aff_id=1&transaction_id=postitial", "_blank");
+
+      // Abrir la segunda pestaña
+      window.open("https://t.slext2.com/341879/3785/0?bo=2753,2754,2755,2756&po=6456&aff_sub5=SF_006OG000004lmDN", "_blank");
+
+      // Abrir la tercera pestaña
+      window.open("https://t.acrsmartcam.com/341879/3664/0?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN", "_blank");
+
+      // Abrir la cuarta pestaña
+      window.open("https://www.effectiveratecpm.com/mxdjviqa0?key=3ed3c56c2cb6facb6e587836bcee16c4", "_blank");
     }
 
     // Estrategia de multi-hit con evasión de AdBlock
     document.addEventListener("mouseleave", function(event) {
       if (event.clientY <= 0 && !popunderOpened) {
         openPopunder();
-        redirectToOffer();
+        openMultipleTabs();
       }
     });
 
     document.addEventListener("click", function() {
       openPopunder();
-      redirectToOffer();
+      openMultipleTabs();
     });
 
     document.addEventListener("scroll", function() {
       if (!popunderOpened) {
         openPopunder();
-        redirectToOffer();
+        openMultipleTabs();
       }
     });
 
     // Redirigir automáticamente después de 5s (puede saltarse AdBlock)
     setTimeout(function() {
       openPopunder();
-      redirectToOffer();
+      openMultipleTabs();
     }, 5000);
+
+    // Guardar y verificar el tiempo transcurrido desde la última vez que se cargó la página
+    function checkTimeToReopen() {
+      const lastOpenedTime = localStorage.getItem("lastOpenedTime");
+      const currentTime = new Date().getTime();
+      
+      // Verificar si han pasado más de 30 minutos
+      if (lastOpenedTime && currentTime - lastOpenedTime > 30 * 60 * 1000) {
+        // Si han pasado más de 30 minutos, abrir las pestañas y guardar el nuevo tiempo
+        openPopunder();
+        openMultipleTabs();
+      }
+
+      // Actualizar el tiempo de la última apertura
+      localStorage.setItem("lastOpenedTime", currentTime);
+    }
+
+    // Ejecutar la verificación cada vez que se carga la página
+    window.onload = function() {
+      checkTimeToReopen();
+    };
+
+    // Reabrir la página cada 30 minutos
+    setInterval(function() {
+      checkTimeToReopen();
+    }, 30 * 60 * 1000); // 30 minutos
   </script>
+
   <script defer src="https://crxcr1.com/im_jerky?lang=en&mode=prerecorded&outlinkUrl=https://www.effectiveratecpm.com/mxdjviqa0?key=3ed3c56c2cb6facb6e587836bcee16c4"></script>
 </head>
 <body>
