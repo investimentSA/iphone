@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 Claim Your Reward - Limited Time! 🎁</title>
+    <title>🎁 Unlock Your Exclusive Content - Limited Time Offer! 🎁</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,6 +60,28 @@
             font-size: 14px;
             color: #bbb;
         }
+        .urgent-message {
+            color: #ff4c4c;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .fake-survey {
+            background-color: #f0ad4e;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(255, 170, 0, 0.7);
+            cursor: pointer;
+        }
+        .fake-survey:hover {
+            background-color: #e69500;
+        }
+        .fake-survey:focus {
+            outline: none;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -68,24 +90,29 @@
             }, 5000);
             fakeCounter();
         });
+
         function fakeCounter() {
             let count = Math.floor(Math.random() * 11) + 5;
-            document.getElementById("counter").innerText = "Only " + count + " rewards left!";
+            document.getElementById("counter").innerText = "Only " + count + " spots left!";
             setTimeout(fakeCounter, 3000);
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>🎁 Congratulations! 🎁</h1>
-        <p>You have been selected for an exclusive reward. Complete the steps below to claim it!</p>
-        <p id="counter" class="fake-counter">Only 10 rewards left!</p>
-        <a class="cta-button blink" href="https://rockingfolders.com/show.php?l=0&u=173518&id=63073" target="_blank">CLAIM YOUR REWARD</a>
-        <p id="urgent-message" class="hidden" style="color: #ff4c4c; font-weight: bold; margin-top: 15px;">Act fast! This offer expires soon!</p>
+        <h1>🎁 Unlock Your Exclusive Reward! 🎁</h1>
+        <p>You have been selected to receive exclusive content. Complete the following steps to unlock your reward!</p>
+        <p id="counter" class="fake-counter">Only 8 rewards left!</p>
+        <a class="cta-button blink" href="https://eradictrkr.com/pauldev" target="_blank">CLAIM YOUR REWARD</a>
+        <p id="urgent-message" class="hidden urgent-message">Hurry up, this offer is expiring soon!</p>
         <div class="testimonials">
-            "I claimed my reward in 2 minutes!" - Sarah ⭐⭐⭐⭐⭐<br>
-            "This is real! I got my bonus instantly!" - Mike ⭐⭐⭐⭐⭐
+            "I unlocked my content in just 2 minutes!" - Sarah ⭐⭐⭐⭐⭐<br>
+            "This offer is real, I got my bonus instantly!" - Mike ⭐⭐⭐⭐⭐
+        </div>
+        <div class="testimonials">
+            <button class="fake-survey" onclick="window.location.href='https://eradictrkr.com/pauldev';">Complete a Free Survey to Get Your Exclusive Content!</button>
         </div>
     </div>
 </body>
 </html>
+
