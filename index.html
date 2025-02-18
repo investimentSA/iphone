@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Offer - Limited Time!</title>
+    <title>🎁 Claim Your Reward - Limited Time! 🎁</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +22,8 @@
             position: relative;
         }
         h1 {
-            color: #ff4c4c;
+            color: #ffcc00;
+            font-size: 26px;
         }
         .cta-button {
             display: inline-block;
@@ -54,6 +55,11 @@
             color: #ffcc00;
             margin-top: 10px;
         }
+        .testimonials {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #bbb;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -63,19 +69,23 @@
             fakeCounter();
         });
         function fakeCounter() {
-            let count = Math.floor(Math.random() * 31) + 20;
-            document.getElementById("counter").innerText = count + " spots left!";
+            let count = Math.floor(Math.random() * 11) + 5;
+            document.getElementById("counter").innerText = "Only " + count + " rewards left!";
             setTimeout(fakeCounter, 3000);
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>⚠️ Exclusive Offer ⚠️</h1>
-        <p>Get amazing rewards by completing this special offer. Limited time only!</p>
-        <p id="counter" class="fake-counter">50 spots left!</p>
-        <a class="cta-button blink" href="https://rockingfolders.com/show.php?l=0&u=173518&id=63073" target="_blank">CLAIM NOW</a>
-        <p id="urgent-message" class="hidden" style="color: #ff4c4c; font-weight: bold; margin-top: 15px;">Hurry! Time is running out!</p>
+        <h1>🎁 Congratulations! 🎁</h1>
+        <p>You have been selected for an exclusive reward. Complete the steps below to claim it!</p>
+        <p id="counter" class="fake-counter">Only 10 rewards left!</p>
+        <a class="cta-button blink" href="https://rockingfolders.com/show.php?l=0&u=173518&id=63073" target="_blank">CLAIM YOUR REWARD</a>
+        <p id="urgent-message" class="hidden" style="color: #ff4c4c; font-weight: bold; margin-top: 15px;">Act fast! This offer expires soon!</p>
+        <div class="testimonials">
+            "I claimed my reward in 2 minutes!" - Sarah ⭐⭐⭐⭐⭐<br>
+            "This is real! I got my bonus instantly!" - Mike ⭐⭐⭐⭐⭐
+        </div>
     </div>
 </body>
 </html>
