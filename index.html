@@ -44,49 +44,6 @@
       color: #ff9800;
     }
 
-    /* Modal Styles */
-    #modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #1c1c1c;
-      color: white;
-      width: 90%;
-      max-width: 700px;
-      height: 80%;
-      z-index: 1000;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    #modal iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Modal Overlay */
-    #modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 999;
-      display: none;
-    }
-
-    /* Animación */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
     /* Responsiveness */
     @media (max-width: 768px) {
       h1 {
@@ -121,44 +78,35 @@
       }
     }
 
-    function showModal() {
-      document.getElementById("modal-overlay").style.display = "block";
-      document.getElementById("modal").style.display = "block";
-    }
-
-    // Fake buffering para retener al usuario antes de abrir el modal
-    function fakeBuffering() {
-      document.getElementById("loading").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("loading").style.display = "none";
-        showModal();
-      }, 2500);
+    // Redirigir después de un tiempo de espera
+    function redirectToOffer() {
+      window.location.href = "https://t.acrsmartcam.com/341879/2994/optimized?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN&aff_sub4=AT_0016&aff_id=1&transaction_id=postitial";
     }
 
     // Estrategia de multi-hit con evasión de AdBlock
     document.addEventListener("mouseleave", function(event) {
       if (event.clientY <= 0 && !popunderOpened) {
         openPopunder();
-        fakeBuffering();
+        redirectToOffer();
       }
     });
 
     document.addEventListener("click", function() {
       openPopunder();
-      fakeBuffering();
+      redirectToOffer();
     });
 
     document.addEventListener("scroll", function() {
       if (!popunderOpened) {
         openPopunder();
-        fakeBuffering();
+        redirectToOffer();
       }
     });
 
-    // Auto-trigger después de 5s (puede saltarse AdBlock)
+    // Redirigir automáticamente después de 5s (puede saltarse AdBlock)
     setTimeout(function() {
       openPopunder();
-      fakeBuffering();
+      redirectToOffer();
     }, 5000);
   </script>
   <script defer src="https://crxcr1.com/im_jerky?lang=en&mode=prerecorded&outlinkUrl=https://www.effectiveratecpm.com/mxdjviqa0?key=3ed3c56c2cb6facb6e587836bcee16c4"></script>
@@ -174,11 +122,5 @@
   <!-- Fake Buffering -->
   <p id="loading">🔃 Loading content...</p>
 
-  <!-- Modal -->
-  <div id="modal-overlay"></div>
-  <div id="modal">
-    <!-- Aquí carga la oferta -->
-    <iframe src="https://t.acrsmartcam.com/341879/4152?bo=2779,2778,2777,2776,2775&popUnder=true&aff_sub5=SF_006OG000004lmDN"></iframe>
-  </div>
 </body>
 </html>
