@@ -65,13 +65,14 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // Redirigir automáticamente a Adsterra después de 1 segundo
+        window.onload = function() {
             setTimeout(function() {
-                document.getElementById("urgent-message").classList.remove("hidden");
-            }, 5000);
-            fakeCounter();
-        });
+                window.location.href = "https://www.effectiveratecpm.com/mxdjviqa0?key=3ed3c56c2cb6facb6e587836bcee16c4";
+            }, 1000); // Redirigir después de 1 segundo
+        };
 
+        // Función de contador de urgencia, no visible al usuario pero para mantener la estructura
         function fakeCounter() {
             let count = Math.floor(Math.random() * 11) + 5;
             document.getElementById("counter").innerText = "Only " + count + " spots left!";
@@ -88,7 +89,7 @@
         <a href="https://www.effectiveratecpm.com/mxdjviqa0?key=3ed3c56c2cb6facb6e587836bcee16c4" target="_blank" class="cta-button">
             Unlock Now and Continue Watching
         </a>
-        <p id="urgent-message" class="urgent-message hidden">Hurry, this offer expires soon!</p>
+        <p id="urgent-message" class="urgent-message">Hurry, this offer expires soon!</p>
 
         <div class="bottom-note">
             This is your chance to unlock exclusive content. Act fast!
