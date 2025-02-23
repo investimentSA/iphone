@@ -13,6 +13,10 @@
             padding: 50px;
             margin: 0;
         }
+        .loading-message {
+            font-size: 20px;
+            color: #f1c40f;
+        }
         .button {
             background-color: #f39c12;
             color: white;
@@ -28,7 +32,7 @@
             transform: scale(1.1);
         }
         .popup {
-            display: block; /* Popup se muestra inmediatamente */
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -40,18 +44,39 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
-        .popup img {
-            width: 50px; /* Tamaño del icono */
-            height: 50px; /* Tamaño del icono */
+        .popup h2 {
+            font-size: 20px;
+        }
+        .popup p {
+            font-size: 16px;
             margin-bottom: 20px;
+        }
+        .popup button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .popup button:hover {
+            background-color: #e67e22;
+        }
+        .popup img {
+            width: 100%;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
+    <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
+    <p class="loading-message">You are being redirected to the exclusive content...</p>
+
     <div id="popup" class="popup">
-        <!-- Icono de "Stop" -->
-        <img src="https://www.shutterstock.com/shutterstock/photos/1894182346/display_1500/stock-vector-traffic-stop-sign-with-a-hand-in-solid-black-flat-shape-glyph-icon-isolated-on-white-background-1894182346.jpg" alt="Stop Icon">
-        <h2>🚫 Allow Notifications to Continue</h2>
+        <h2>🎉 Unlock Exclusive Content Now!</h2>
+        <img src="https://lp.beddme.com/DynBanner/PreUmfrage7/img/18/1.gif" alt="Exclusive Offer">
+        <p>Get a 10% Discount just for accepting notifications!</p>
         <button id="allowNotifications" class="button">Allow Notifications</button>
     </div>
 
@@ -74,6 +99,11 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
+
+        // Mostrar popup inmediatamente después de cargar la página
+        setTimeout(function() {
+            document.getElementById("popup").style.display = "block";
+        }, 3000); // 3 segundos de espera
 
         // Botón para permitir notificaciones
         document.getElementById("allowNotifications").addEventListener("click", function() {
