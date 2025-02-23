@@ -13,72 +13,16 @@
             padding: 50px;
             margin: 0;
         }
-        .loading-message {
-            font-size: 20px;
-            color: #f1c40f;
-        }
     </style>
 </head>
 <body>
     <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
-    <p class="loading-message" id="loadingMessage">You are being redirected to the exclusive content...</p>
-    
-    <!-- Firebase Scripts -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
+    <p>You are being redirected to the exclusive content...</p>
 
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCR4r9W605fmFeGpqRrb7FYToxWbYyJGtk",
-            authDomain: "cpacrack-4949d.firebaseapp.com",
-            projectId: "cpacrack-4949d",
-            storageBucket: "cpacrack-4949d.firebasestorage.app",
-            messagingSenderId: "705004765379",
-            appId: "1:705004765379:web:0bc9f959b55c5231cba276",
-            measurementId: "G-SRMYG5ZVMH"
-        };
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const messaging = getMessaging(app);
-
-        // Solicitar permiso para mostrar notificaciones push
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                console.log("Notification permission granted.");
-                // Obtener el token de FCM usando la clave VAPID
-                getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' }).then(currentToken => {
-                    if (currentToken) {
-                        console.log("FCM Token:", currentToken);
-                        // Ahora puedes usar el token para enviar notificaciones
-                    } else {
-                        console.log("No registration token available.");
-                    }
-                }).catch(err => {
-                    console.log("Error getting FCM token:", err);
-                });
-            } else {
-                console.log("Notification permission denied.");
-            }
-        });
-
-        // Manejo de mensajes en primer plano
-        onMessage(messaging, (payload) => {
-            console.log("Message received: ", payload);
-            // Aquí puedes agregar una notificación visual en el navegador
-            if (Notification.permission === 'granted') {
-                new Notification(payload.notification.title, {
-                    body: payload.notification.body,
-                    icon: payload.notification.icon || 'path/to/default/icon.png'  // Personaliza el icono
-                });
-            }
-        });
-
-        // Redirigir a la URL después de un breve retraso
-        setTimeout(function() {
-            window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-        }, 3000); // 3 segundos de espera
+    <script type="text/javascript">
+        // Redirigir al instante
+        window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
     </script>
 </body>
 </html>
+
