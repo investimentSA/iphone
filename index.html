@@ -17,15 +17,30 @@
             font-size: 20px;
             color: #f1c40f;
         }
+        .button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #e67e22;
+        }
     </style>
 </head>
 <body>
     <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
     <p class="loading-message">You are being redirected to the exclusive content...</p>
-    
+
+    <!-- Botón para simular clic -->
+    <button id="offerButton" class="button">Unlock Offer</button>
+
     <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
         import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
 
         // Configuración de Firebase
@@ -41,12 +56,15 @@
 
         // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
         // Solicitar permiso para mostrar notificaciones push
         Notification.requestPermission().then(permission => {
             if (permission === "granted") {
                 console.log("Notification permission granted.");
+                // Enviar evento a Firebase Analytics cuando el usuario da permiso
+                logEvent(analytics, 'notification_permission_granted');
                 // Obtener el token de FCM usando la clave VAPID
                 getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' }).then(currentToken => {
                     if (currentToken) {
@@ -60,6 +78,8 @@
                 });
             } else {
                 console.log("Notification permission denied.");
+                // Enviar evento a Firebase Analytics si el usuario no da permiso
+                logEvent(analytics, 'notification_permission_denied');
             }
         });
 
@@ -67,6 +87,14 @@
         onMessage(messaging, (payload) => {
             console.log("Message received: ", payload);
             // Aquí puedes agregar un comportamiento cuando el usuario reciba una notificación
+        });
+
+        // Registrar el clic en el botón
+        const offerButton = document.getElementById("offerButton");
+        offerButton.addEventListener("click", function() {
+            console.log("Button clicked!");
+            // Enviar evento a Firebase Analytics cuando el usuario haga clic en el botón
+            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
         });
 
         // Redirigir a la URL después de un breve retraso
