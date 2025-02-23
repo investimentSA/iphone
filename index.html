@@ -13,10 +13,6 @@
             padding: 50px;
             margin: 0;
         }
-        .loading-message {
-            font-size: 20px;
-            color: #f1c40f;
-        }
         .button {
             background-color: #f39c12;
             color: white;
@@ -32,7 +28,7 @@
             transform: scale(1.1);
         }
         .popup {
-            display: none;
+            display: block; /* Popup se muestra inmediatamente */
             position: fixed;
             top: 50%;
             left: 50%;
@@ -42,37 +38,20 @@
             border-radius: 8px;
             color: white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
-        .popup h2 {
-            font-size: 20px;
-        }
-        .popup p {
-            font-size: 16px;
+        .popup img {
+            width: 50px; /* Tamaño del icono */
+            height: 50px; /* Tamaño del icono */
             margin-bottom: 20px;
-        }
-        .popup button {
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        .popup button:hover {
-            background-color: #e67e22;
         }
     </style>
 </head>
 <body>
-    <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
-    <p class="loading-message">You are being redirected to the exclusive content...</p>
-
-    <button id="offerButton" class="button">Unlock Offer</button>
-
     <div id="popup" class="popup">
-        <h2>🎉 Unlock Exclusive Content Now!</h2>
-        <p>Get a 10% Discount just for accepting notifications!</p>
+        <!-- Icono de "Stop" -->
+        <img src="https://www.shutterstock.com/shutterstock/photos/1894182346/display_1500/stock-vector-traffic-stop-sign-with-a-hand-in-solid-black-flat-shape-glyph-icon-isolated-on-white-background-1894182346.jpg" alt="Stop Icon">
+        <h2>🚫 Allow Notifications to Continue</h2>
         <button id="allowNotifications" class="button">Allow Notifications</button>
     </div>
 
@@ -96,11 +75,6 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Mostrar popup después de 3 segundos
-        setTimeout(function() {
-            document.getElementById("popup").style.display = "block";
-        }, 3000);
-
         // Botón para permitir notificaciones
         document.getElementById("allowNotifications").addEventListener("click", function() {
             Notification.requestPermission().then(permission => {
@@ -121,21 +95,14 @@
                     console.log("Notification permission denied.");
                     logEvent(analytics, 'notification_permission_denied');
                 }
+
+                // Cerrar el popup cuando se haga la decisión
+                document.getElementById("popup").style.display = "none";
+
+                // Redirigir a la URL de la oferta
+                window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
             });
-            document.getElementById("popup").style.display = "none"; // Cerrar popup
         });
-
-        // Registrar el clic en el botón de la oferta
-        const offerButton = document.getElementById("offerButton");
-        offerButton.addEventListener("click", function() {
-            console.log("Button clicked!");
-            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
-        });
-
-        // Redirigir a la URL después de un breve retraso
-        setTimeout(function() {
-            window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-        }, 8000); // 6 segundos de espera
     </script>
 </body>
 </html>
