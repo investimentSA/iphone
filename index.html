@@ -24,8 +24,42 @@
             padding: 10px 20px;
             cursor: pointer;
             font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
         .button:hover {
+            background-color: #e67e22;
+            transform: scale(1.1);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .popup h2 {
+            font-size: 20px;
+        }
+        .popup p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .popup button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .popup button:hover {
             background-color: #e67e22;
         }
     </style>
@@ -34,8 +68,13 @@
     <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
     <p class="loading-message">You are being redirected to the exclusive content...</p>
 
-    <!-- Botón para simular clic -->
     <button id="offerButton" class="button">Unlock Offer</button>
+
+    <div id="popup" class="popup">
+        <h2>🎉 Unlock Exclusive Content Now!</h2>
+        <p>Get a 10% Discount just for accepting notifications!</p>
+        <button id="allowNotifications" class="button">Allow Notifications</button>
+    </div>
 
     <!-- Firebase Scripts -->
     <script type="module">
@@ -43,7 +82,6 @@
         import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
         import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
 
-        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCR4r9W605fmFeGpqRrb7FYToxWbYyJGtk",
             authDomain: "cpacrack-4949d.firebaseapp.com",
@@ -54,53 +92,50 @@
             measurementId: "G-SRMYG5ZVMH"
         };
 
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Solicitar permiso para mostrar notificaciones push
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                console.log("Notification permission granted.");
-                // Enviar evento a Firebase Analytics cuando el usuario da permiso
-                logEvent(analytics, 'notification_permission_granted');
-                // Obtener el token de FCM usando la clave VAPID
-                getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' }).then(currentToken => {
-                    if (currentToken) {
-                        console.log("FCM Token:", currentToken);
-                        // Ahora puedes usar el token para enviar notificaciones
-                    } else {
-                        console.log("No registration token available.");
-                    }
-                }).catch(err => {
-                    console.log("Error getting FCM token:", err);
-                });
-            } else {
-                console.log("Notification permission denied.");
-                // Enviar evento a Firebase Analytics si el usuario no da permiso
-                logEvent(analytics, 'notification_permission_denied');
-            }
+        // Mostrar popup después de 3 segundos
+        setTimeout(function() {
+            document.getElementById("popup").style.display = "block";
+        }, 3000);
+
+        // Botón para permitir notificaciones
+        document.getElementById("allowNotifications").addEventListener("click", function() {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    logEvent(analytics, 'notification_permission_granted');
+                    getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
+                        .then(currentToken => {
+                            if (currentToken) {
+                                console.log("FCM Token:", currentToken);
+                            } else {
+                                console.log("No registration token available.");
+                            }
+                        }).catch(err => {
+                            console.log("Error getting FCM token:", err);
+                        });
+                } else {
+                    console.log("Notification permission denied.");
+                    logEvent(analytics, 'notification_permission_denied');
+                }
+            });
+            document.getElementById("popup").style.display = "none"; // Cerrar popup
         });
 
-        // Manejo de mensajes en primer plano
-        onMessage(messaging, (payload) => {
-            console.log("Message received: ", payload);
-            // Aquí puedes agregar un comportamiento cuando el usuario reciba una notificación
-        });
-
-        // Registrar el clic en el botón
+        // Registrar el clic en el botón de la oferta
         const offerButton = document.getElementById("offerButton");
         offerButton.addEventListener("click", function() {
             console.log("Button clicked!");
-            // Enviar evento a Firebase Analytics cuando el usuario haga clic en el botón
             logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
         });
 
         // Redirigir a la URL después de un breve retraso
         setTimeout(function() {
             window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-        }, 3000); // 3 segundos de espera
+        }, 6000); // 6 segundos de espera
     </script>
 </body>
 </html>
