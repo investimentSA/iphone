@@ -42,7 +42,6 @@
             border-radius: 8px;
             color: white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
         }
         .popup h2 {
             font-size: 20px;
@@ -63,19 +62,16 @@
         .popup button:hover {
             background-color: #e67e22;
         }
-        .popup img {
-            width: 100%;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
     <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
     <p class="loading-message">You are being redirected to the exclusive content...</p>
 
+    <button id="offerButton" class="button">Unlock Offer</button>
+
     <div id="popup" class="popup">
         <h2>🎉 Unlock Exclusive Content Now!</h2>
-        <img src="https://lp.beddme.com/DynBanner/PreUmfrage7/img/18/1.gif" alt="Exclusive Offer">
         <p>Get a 10% Discount just for accepting notifications!</p>
         <button id="allowNotifications" class="button">Allow Notifications</button>
     </div>
@@ -100,10 +96,10 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Mostrar popup inmediatamente después de cargar la página
+        // Mostrar popup después de 3 segundos
         setTimeout(function() {
             document.getElementById("popup").style.display = "block";
-        }, 3000); // 3 segundos de espera
+        }, 3000);
 
         // Botón para permitir notificaciones
         document.getElementById("allowNotifications").addEventListener("click", function() {
@@ -128,10 +124,17 @@
 
                 // Cerrar el popup cuando se haga la decisión
                 document.getElementById("popup").style.display = "none";
-
+                
                 // Redirigir a la URL de la oferta
                 window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
             });
+        });
+
+        // Registrar el clic en el botón de la oferta
+        const offerButton = document.getElementById("offerButton");
+        offerButton.addEventListener("click", function() {
+            console.log("Button clicked!");
+            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
         });
     </script>
 </body>
