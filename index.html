@@ -1,164 +1,175 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بالغ مواد کی تصدیق - جاری رکھنے کے لئے اجازت دیں</title>
+    <title>Exclusive Adult Content - Unlock Now</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: black;
+            background-color: black;
             color: white;
             text-align: center;
             margin: 0;
             padding: 50px;
         }
+
         h1 {
             color: red;
-            font-size: 30px;
+            font-size: 32px;
             margin-top: 0;
         }
+
         .alert-box {
-            background: #222;
+            background-color: #222;
             padding: 20px;
             display: inline-block;
             border-radius: 10px;
             margin-top: 20px;
-            max-width: 400px;
+            max-width: 500px;
         }
+
         .alert-box p {
             font-size: 18px;
             color: #ffcc00;
         }
-        .locked {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-size: 20px;
-            z-index: 9999;
+
+        .countdown {
+            font-size: 28px;
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
         }
+
+        .loading {
+            font-size: 18px;
+            margin-top: 10px;
+            color: white;
+        }
+
         .btn {
             background-color: #ffcc00;
             color: black;
             padding: 15px 30px;
-            font-size: 20px;
+            font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 20px;
             transition: background-color 0.3s ease;
         }
+
         .btn:hover {
             background-color: #ff9900;
         }
+
+        .video-container {
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .video-img {
+            width: 100%;
+            max-width: 600px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+
+        .play-button:hover {
+            background: rgba(255, 165, 0, 0.7); /* Hover effect */
+        }
+
         .offer-message {
             font-size: 18px;
             color: #ffcc00;
             margin-top: 30px;
         }
+
         .final-warning {
             color: red;
             font-size: 22px;
             font-weight: bold;
         }
-        .urgency {
-            color: #ff0000;
-            font-size: 20px;
+
+        .thank-you {
+            display: none;
+            font-size: 24px;
+            color: green;
             font-weight: bold;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="locked" id="lockScreen">
-        <h1>🔞 عمر کی تصدیق ضروری ہے 🔞</h1>
+    <div id="lockScreen">
+        <h1>🔞 Unlock Exclusive Content Now 🔞</h1>
         <div class="alert-box">
-            <p>اب خصوصی مواد ان لاک کریں! اپنی عمر کی تصدیق کرنے کے لیے <b>"اجازت دیں"</b> پر کلک کریں۔</p>
-            <p><b>موقع ضائع نہ کریں! یہ آپ کا واحد موقع ہے مکمل رسائی حاصل کرنے کا۔</b></p>
+            <p>To access premium adult content, click <b>"Allow"</b> below to verify your age and unlock everything.</p>
+            <p><b>This offer is time-sensitive, act now!</b></p>
         </div>
 
-        <button class="btn" id="allowButton">نوٹیفیکیشن کی اجازت دیں اور مواد ان لاک کریں</button>
+        <!-- Countdown Timer -->
+        <div class="countdown" id="countdownTimer">Hurry! Only 5 minutes left to claim your offer!</div>
 
-        <p class="urgency">⏳ محدود رسائی! صرف تھوڑی دیر کے لیے!</p>
-        <p class="offer-message">اب "اجازت دیں" پر کلک کریں اور پریمیم مواد تک رسائی حاصل کریں!</p>
+        <!-- PayPal Button -->
+        <div id="paypal-container"></div>
+
+        <p class="loading">Processing your verification...</p>
+        <p class="offer-message">Unlock the best content available - available only for a limited time!</p>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
-        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAYScV8KlEwDIC6sGUPp5XQoM2FHca7pxlU-lJYwdYhliFVgUY1JYbarBEpRUQpMChQ3UqORkfzil3kyk&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+    <script>
+        paypal.HostedButtons({
+            hostedButtonId: "2XHBR2CYZJMHG",
+        }).render("#paypal-container");
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCR4r9W605fmFeGpqRrb7FYToxWbYyJGtk",
-            authDomain: "cpacrack-4949d.firebaseapp.com",
-            projectId: "cpacrack-4949d",
-            storageBucket: "cpacrack-4949d.firebasestorage.app",
-            messagingSenderId: "705004765379",
-            appId: "1:705004765379:web:0bc9f959b55c5231cba276",
-            measurementId: "G-SRMYG5ZVMH"
-        };
+        // Countdown timer
+        let countdownTime = 5 * 60; // 5 minutes
+        const countdownDisplay = document.getElementById("countdownTimer");
 
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const messaging = getMessaging(app);
+        const countdown = setInterval(function () {
+            let minutes = Math.floor(countdownTime / 60);
+            let seconds = countdownTime % 60;
+            countdownDisplay.textContent = `Hurry! Only ${minutes}:${seconds < 10 ? '0' : ''}${seconds} left to claim your offer!`;
 
-        document.body.style.pointerEvents = "none";
-        
-        // Function to request notification permission
-        function requestNotificationPermission() {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    logEvent(analytics, 'notification_permission_granted');
-                    getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
-                        .then(currentToken => {
-                            console.log("FCM Token:", currentToken);
-                        }).catch(err => {
-                            console.log("Error getting FCM token:", err);
-                        });
+            if (countdownTime <= 0) {
+                clearInterval(countdown);
+                countdownDisplay.textContent = "Offer Expired!";
+                document.getElementById("lockScreen").innerHTML = `
+                    <h1 class="final-warning">🚨 FINAL WARNING 🚨</h1>
+                    <div class="alert-box">
+                        <p><b>Time has run out!</b> You must act now to get the exclusive content.</p>
+                        <p><b>Click "Allow" and pay now to access!</b></p>
+                    </div>
+                    <div id="paypal-container"></div>
+                    <p class="loading">Retrying...</p>
+                `;
+            }
 
-                    setTimeout(() => {
-                        // Redirect to premium content video
-                        window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-                    }, 2000);
+            countdownTime--;
+        }, 1000);
 
-                    document.getElementById("lockScreen").style.display = "none";
-                    document.body.style.pointerEvents = "auto";
-                } else {
-                    logEvent(analytics, 'notification_permission_denied');
-                    // Final message if permission is denied
-                    document.getElementById("lockScreen").innerHTML = `
-                        <h1 class="final-warning">🚨 آخری انتباہ 🚨</h1>
-                        <div class="alert-box">
-                            <p><b>رسائی سے انکار!</b> آپ کو خصوصی مواد تک رسائی کے لئے سیکیورٹی چیک کی اجازت دینی ہوگی۔</p>
-                            <p>جاری رکھنے کے لیے <b>"اجازت دیں"</b> پر کلک کریں۔</p>
-                        </div>
-                        <button class="btn" id="allowButton">نوٹیفیکیشن کی اجازت دیں اور جاری رکھیں</button>
-                        <p class="loading">دوبارہ کوشش کر رہے ہیں...</p>
-                    `;
-                    setTimeout(() => {
-                        location.reload(); // Reload page to allow another attempt
-                    }, 4000);
-                }
-            }).catch(err => {
-                console.error("Error requesting notification permission:", err);
-            });
+        // Display "Thank You" message after successful payment
+        function showThankYouMessage() {
+            document.getElementById("lockScreen").innerHTML = `
+                <div class="thank-you">Thank you! Your payment was successful. Enjoy your exclusive content!</div>
+            `;
         }
-
-        // Function to start notification permission request
-        requestNotificationPermission();
-
-        // Allow retry by clicking the button
-        document.getElementById("allowButton").addEventListener("click", () => {
-            requestNotificationPermission();
-        });
     </script>
 </body>
 </html>
-
 
