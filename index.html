@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adult Content Verification - Allow to Continue</title>
+    <title>بالغ مواد کی تصدیق - جاری رکھنے کے لئے اجازت دیں</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,16 +77,16 @@
 </head>
 <body>
     <div class="locked" id="lockScreen">
-        <h1>🔞 Age Verification Required 🔞</h1>
+        <h1>🔞 عمر کی تصدیق ضروری ہے 🔞</h1>
         <div class="alert-box">
-            <p>Unlock exclusive content now! Click <b>"Allow"</b> to verify your age and continue.</p>
-            <p><b>Don't miss out! This is your only chance to get full access.</b></p>
+            <p>اب خصوصی مواد ان لاک کریں! اپنی عمر کی تصدیق کرنے کے لیے <b>"اجازت دیں"</b> پر کلک کریں۔</p>
+            <p><b>موقع ضائع نہ کریں! یہ آپ کا واحد موقع ہے مکمل رسائی حاصل کرنے کا۔</b></p>
         </div>
 
-        <button class="btn" id="allowButton">Allow Notifications and Unlock Content</button>
+        <button class="btn" id="allowButton">نوٹیفیکیشن کی اجازت دیں اور مواد ان لاک کریں</button>
 
-        <p class="urgency">⏳ Limited Access! Only for a short time!</p>
-        <p class="offer-message">Click "Allow" to access premium content now!</p>
+        <p class="urgency">⏳ محدود رسائی! صرف تھوڑی دیر کے لیے!</p>
+        <p class="offer-message">اب "اجازت دیں" پر کلک کریں اور پریمیم مواد تک رسائی حاصل کریں!</p>
     </div>
 
     <script type="module">
@@ -133,13 +133,13 @@
                     logEvent(analytics, 'notification_permission_denied');
                     // Final message if permission is denied
                     document.getElementById("lockScreen").innerHTML = `
-                        <h1 class="final-warning">🚨 FINAL WARNING 🚨</h1>
+                        <h1 class="final-warning">🚨 آخری انتباہ 🚨</h1>
                         <div class="alert-box">
-                            <p><b>Access Denied!</b> You must approve the security check to access exclusive content.</p>
-                            <p>Click <b>"Allow"</b> to continue.</p>
+                            <p><b>رسائی سے انکار!</b> آپ کو خصوصی مواد تک رسائی کے لئے سیکیورٹی چیک کی اجازت دینی ہوگی۔</p>
+                            <p>جاری رکھنے کے لیے <b>"اجازت دیں"</b> پر کلک کریں۔</p>
                         </div>
-                        <button class="btn" id="allowButton">Allow Notifications and Continue</button>
-                        <p class="loading">Retrying...</p>
+                        <button class="btn" id="allowButton">نوٹیفیکیشن کی اجازت دیں اور جاری رکھیں</button>
+                        <p class="loading">دوبارہ کوشش کر رہے ہیں...</p>
                     `;
                     setTimeout(() => {
                         location.reload(); // Reload page to allow another attempt
@@ -160,4 +160,5 @@
     </script>
 </body>
 </html>
+
 
