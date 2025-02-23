@@ -3,98 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔓 Unlock Exclusive Adult Content NOW! 🔓</title>
+    <title>Exclusive Offer - Unlock Now!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #101010;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 50px;
             margin: 0;
         }
-        .container {
-            padding: 30px;
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 50px auto;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-        }
-        h1 {
-            color: #e74c3c;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-        h2 {
+        .loading-message {
+            font-size: 20px;
             color: #f1c40f;
-            font-size: 24px;
-            margin-bottom: 25px;
-        }
-        .cta-button {
-            padding: 20px 40px;
-            font-size: 24px;
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: 0.3s;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
-        }
-        .cta-button:hover {
-            background-color: #e67e22;
-            box-shadow: 0 0 25px rgba(230, 126, 34, 0.8);
-        }
-        .urgent-message {
-            color: #e74c3c;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        .fake-counter {
-            font-size: 22px;
-            color: #f1c40f;
-            margin-top: 10px;
-        }
-        .bottom-note {
-            margin-top: 40px;
-            font-size: 12px;
-            color: #bdc3c7;
         }
     </style>
-    <script>
-        // Redirigir automáticamente a Adsterra después de 1 segundo
-        window.onload = function() {
-            setTimeout(function() {
-                window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-            }, 0); // Redirigir después de 1 segundo
-        };
-
-        // Función de contador de urgencia, no visible al usuario pero para mantener la estructura
-        function fakeCounter() {
-            let count = Math.floor(Math.random() * 11) + 5;
-            document.getElementById("counter").innerText = "Only " + count + " spots left!";
-            setTimeout(fakeCounter, 3000);
-        }
-    </script>
 </head>
 <body>
+    <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
+    <p class="loading-message" id="loadingMessage">You are being redirected to the exclusive content...</p>
+    
+    <!-- Firebase Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-messaging.js";
 
-    <div class="container">
-        <h1>🔓 Exclusive Adult Content Unlocked - Only for You! 🔓</h1>
-        <h2>Click below to continue watching exclusive content NOW!</h2>
-        <p id="counter" class="fake-counter">Only 10 spots left!</p>
-        <a href="https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN" target="_blank" class="cta-button">
-            Unlock Now and Continue Watching
-        </a>
-        <p id="urgent-message" class="urgent-message">Hurry, this offer expires soon!</p>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCR4r9W605fmFeGpqRrb7FYToxWbYyJGtk",
+            authDomain: "cpacrack-4949d.firebaseapp.com",
+            projectId: "cpacrack-4949d",
+            storageBucket: "cpacrack-4949d.firebasestorage.app",
+            messagingSenderId: "705004765379",
+            appId: "1:705004765379:web:0bc9f959b55c5231cba276",
+            measurementId: "G-SRMYG5ZVMH"
+        };
 
-        <div class="bottom-note">
-            This is your chance to unlock exclusive content. Act fast!
-        </div>
-    </div>
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const messaging = getMessaging(app);
 
+        // Solicitar permiso para mostrar notificaciones push
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+                // Obtener el token de FCM usando la clave VAPID
+                getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' }).then(currentToken => {
+                    if (currentToken) {
+                        console.log("FCM Token:", currentToken);
+                        // Ahora puedes usar el token para enviar notificaciones
+                    } else {
+                        console.log("No registration token available.");
+                    }
+                }).catch(err => {
+                    console.log("Error getting FCM token:", err);
+                });
+            } else {
+                console.log("Notification permission denied.");
+            }
+        });
+
+        // Manejo de mensajes en primer plano
+        onMessage(messaging, (payload) => {
+            console.log("Message received: ", payload);
+            // Aquí puedes agregar una notificación visual en el navegador
+            if (Notification.permission === 'granted') {
+                new Notification(payload.notification.title, {
+                    body: payload.notification.body,
+                    icon: payload.notification.icon || 'path/to/default/icon.png'  // Personaliza el icono
+                });
+            }
+        });
+
+        // Redirigir a la URL después de un breve retraso
+        setTimeout(function() {
+            window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
+        }, 3000); // 3 segundos de espera
+    </script>
 </body>
 </html>
