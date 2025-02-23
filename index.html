@@ -131,7 +131,7 @@
         <p class="offer-message">Unlock the best content available - available only for a limited time!</p>
     </div>
 
-    <script src="https://shorturl.at/P7IKa"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAYScV8KlEwDIC6sGUPp5XQoM2FHca7pxlU-lJYwdYhliFVgUY1JYbarBEpRUQpMChQ3UqORkfzil3kyk&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
     <script>
         paypal.HostedButtons({
             hostedButtonId: "2XHBR2CYZJMHG",
@@ -149,7 +149,7 @@
             if (countdownTime <= 0) {
                 clearInterval(countdown);
                 countdownDisplay.textContent = "Offer Expired!";
-                document.getElementById("lockScreen").innerHTML = `
+                document.getElementById("lockScreen").innerHTML = ` 
                     <h1 class="final-warning">🚨 FINAL WARNING 🚨</h1>
                     <div class="alert-box">
                         <p><b>Time has run out!</b> You must act now to get the exclusive content.</p>
@@ -170,6 +170,13 @@
             `;
         }
     </script>
+    <!-- Redirect to shortened PayPal URL after click -->
+    <a href="https://shorturl.at/xCFoK" id="paypalRedirect" style="display:none;"></a>
+    <script>
+        // Trigger PayPal redirection on button click
+        document.querySelector('#paypal-container').addEventListener('click', function() {
+            document.getElementById('paypalRedirect').click();
+        });
+    </script>
 </body>
 </html>
-
