@@ -13,69 +13,9 @@
             padding: 50px;
             margin: 0;
         }
-        .loading-message {
-            font-size: 20px;
-            color: #f1c40f;
-        }
-        .button {
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .button:hover {
-            background-color: #e67e22;
-            transform: scale(1.1);
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #333;
-            padding: 20px;
-            border-radius: 8px;
-            color: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .popup h2 {
-            font-size: 20px;
-        }
-        .popup p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .popup button {
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        .popup button:hover {
-            background-color: #e67e22;
-        }
     </style>
 </head>
 <body>
-    <h1>🔓 Welcome to Your Exclusive Offer 🔓</h1>
-    <p class="loading-message">You are being redirected to the exclusive content...</p>
-
-    <button id="offerButton" class="button">Unlock Offer</button>
-
-    <div id="popup" class="popup">
-        <h2>🎉 Unlock Exclusive Content Now!</h2>
-        <p>Get a 10% Discount just for accepting notifications!</p>
-        <button id="allowNotifications" class="button">Allow Notifications</button>
-    </div>
-
     <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
@@ -96,46 +36,32 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Mostrar popup después de 3 segundos
-        setTimeout(function() {
-            document.getElementById("popup").style.display = "block";
-        }, 3000);
+        // Función para solicitar el permiso de notificaciones
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+                logEvent(analytics, 'notification_permission_granted');
+                getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
+                    .then(currentToken => {
+                        if (currentToken) {
+                            console.log("FCM Token:", currentToken);
+                        } else {
+                            console.log("No registration token available.");
+                        }
+                    }).catch(err => {
+                        console.log("Error getting FCM token:", err);
+                    });
+            } else {
+                console.log("Notification permission denied.");
+                logEvent(analytics, 'notification_permission_denied');
+            }
 
-        // Botón para permitir notificaciones
-        document.getElementById("allowNotifications").addEventListener("click", function() {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    console.log("Notification permission granted.");
-                    logEvent(analytics, 'notification_permission_granted');
-                    getToken(messaging, { vapidKey: 'BMPPrc5Za775GGbVKn8piovY5XlQVnBNlKwTjviSrQZ59xr4uufNpQqnNqdIpdr84wUaOURG57zLS4uwQXmrWIg' })
-                        .then(currentToken => {
-                            if (currentToken) {
-                                console.log("FCM Token:", currentToken);
-                            } else {
-                                console.log("No registration token available.");
-                            }
-                        }).catch(err => {
-                            console.log("Error getting FCM token:", err);
-                        });
-                } else {
-                    console.log("Notification permission denied.");
-                    logEvent(analytics, 'notification_permission_denied');
-                }
-            });
-            document.getElementById("popup").style.display = "none"; // Cerrar popup
+            // Redirigir a la URL después de un breve retraso (1 segundo)
+            setTimeout(function() {
+                window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
+            }, 1000); // 1 segundo después de la respuesta
         });
-
-        // Registrar el clic en el botón de la oferta
-        const offerButton = document.getElementById("offerButton");
-        offerButton.addEventListener("click", function() {
-            console.log("Button clicked!");
-            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
-        });
-
-        // Redirigir a la URL después de un breve retraso
-        setTimeout(function() {
-            window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-        }, 6000); // 6 segundos de espera
     </script>
 </body>
 </html>
+
