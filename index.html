@@ -96,19 +96,14 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        // Función para mostrar el popup solo cuando el usuario hace clic en "Unlock Offer"
-        document.getElementById("offerButton").addEventListener("click", function() {
-            console.log("Offer button clicked!");
-            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
-            // Mostrar el popup de notificación
+        // Mostrar popup después de 3 segundos
+        setTimeout(function() {
             document.getElementById("popup").style.display = "block";
-        });
+        }, 3000);
 
         // Botón para permitir notificaciones
         document.getElementById("allowNotifications").addEventListener("click", function() {
-            console.log("Requesting notification permission...");
             Notification.requestPermission().then(permission => {
-                console.log("Notification permission:", permission);
                 if (permission === "granted") {
                     console.log("Notification permission granted.");
                     logEvent(analytics, 'notification_permission_granted');
@@ -126,16 +121,21 @@
                     console.log("Notification permission denied.");
                     logEvent(analytics, 'notification_permission_denied');
                 }
-
-                // Cerrar el popup cuando se haga la decisión
-                document.getElementById("popup").style.display = "none";
-                
-                // Redirigir a la URL de la oferta después de un pequeño delay para garantizar el envío del evento
-                setTimeout(function() {
-                    window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
-                }, 2000);
             });
+            document.getElementById("popup").style.display = "none"; // Cerrar popup
         });
+
+        // Registrar el clic en el botón de la oferta
+        const offerButton = document.getElementById("offerButton");
+        offerButton.addEventListener("click", function() {
+            console.log("Button clicked!");
+            logEvent(analytics, 'offer_button_click', { 'offer_name': 'exclusive_offer' });
+        });
+
+        // Redirigir a la URL después de un breve retraso
+        setTimeout(function() {
+            window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
+        }, 6000); // 6 segundos de espera
     </script>
 </body>
 </html>
