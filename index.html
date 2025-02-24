@@ -3,148 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Adult Content - Unlock Now</title>
+    <title>Access Exclusive Content - Click Now!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: black;
+            background-color: #1b1b1b;
             color: white;
             text-align: center;
             margin: 0;
-            padding: 50px;
+            padding: 0;
         }
 
         h1 {
-            color: red;
-            font-size: 32px;
-            margin-top: 0;
-        }
-
-        .alert-box {
-            background-color: #222;
-            padding: 20px;
-            display: inline-block;
-            border-radius: 10px;
-            margin-top: 20px;
-            max-width: 500px;
-        }
-
-        .alert-box p {
-            font-size: 18px;
             color: #ffcc00;
+            font-size: 36px;
+            margin-top: 50px;
         }
 
-        .countdown {
-            font-size: 28px;
-            color: red;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .loading {
-            font-size: 18px;
-            margin-top: 10px;
-            color: white;
-        }
-
-        .offer-message {
-            font-size: 18px;
-            color: #ffcc00;
-            margin-top: 30px;
-        }
-
-        .final-warning {
-            color: red;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .thank-you {
-            display: none;
+        h2 {
             font-size: 24px;
-            color: green;
-            font-weight: bold;
+            margin-top: 20px;
+            color: #ff9900;
         }
 
-        .paypal-button-container {
-            margin-top: 30px;
-            display: inline-block;
-            padding: 20px;
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #222;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .button {
             background-color: #ffcc00;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
+            color: black;
+            padding: 20px 40px;
             font-size: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: background-color 0.3s;
         }
 
-        .paypal-button-container:hover {
+        .button:hover {
             background-color: #ff9900;
         }
 
-        .paypal-button-text {
-            color: black;
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
         }
 
-        .paypal-button-img {
-            width: 100px;
-            height: auto;
-            vertical-align: middle;
-            margin-right: 10px;
+        .image-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
-    <div id="lockScreen">
-        <h1>🔞 Unlock Exclusive Content Now 🔞</h1>
-        <div class="alert-box">
-            <p>To access premium adult content, click <b>"Allow"</b> below to verify your age and unlock everything.</p>
-            <p><b>This offer is time-sensitive, act now!</b></p>
+    <div class="container">
+        <h1>🔞 Access Exclusive Content Now! 🔞</h1>
+        <h2>Don't miss the chance to enjoy the best premium content! 🌟</h2>
+        
+        <p>Click the link below and unlock full access to exclusive content available only for the quickest. Don't wait anymore!</p>
+
+        <div class="image-container">
+            <!-- You can add an attractive image related to the content here -->
+            <img src="https://cdn77-pic.xvideos-cdn.com/videos/thumbs169poster/dd/fe/66/ddfe6645a61b72e3c55718aeb8db171b/ddfe6645a61b72e3c55718aeb8db171b.30.jpg" alt="Exclusive Content">
         </div>
 
-        <!-- Countdown Timer -->
-        <div class="countdown" id="countdownTimer">Hurry! Only 5 minutes left to claim your offer!</div>
+        <!-- ShrinkMe shortened link -->
+        <a href="https://shrinkme.ink/npV4" class="button">Access Now and Unlock Everything</a>
 
-        <!-- PayPal Button -->
-        <div class="paypal-button-container" onclick="window.location.href='https://shorturl.at/VX9VP';">
-            <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" class="paypal-button-img" alt="PayPal">
-            <span class="paypal-button-text">Pay $5 with PayPal</span>
-        </div>
-
-        <p class="loading">Processing your verification...</p>
-        <p class="offer-message">Unlock the best content available - available only for a limited time!</p>
+        <p class="footer">By clicking this link, you will be redirected to exclusive content. Enjoy the best experience.</p>
     </div>
-
-    <script>
-        // Countdown timer
-        let countdownTime = 5 * 60; // 5 minutes
-        const countdownDisplay = document.getElementById("countdownTimer");
-
-        const countdown = setInterval(function () {
-            let minutes = Math.floor(countdownTime / 60);
-            let seconds = countdownTime % 60;
-            countdownDisplay.textContent = `Hurry! Only ${minutes}:${seconds < 10 ? '0' : ''}${seconds} left to claim your offer!`;
-
-            if (countdownTime <= 0) {
-                clearInterval(countdown);
-                countdownDisplay.textContent = "Offer Expired!";
-                document.getElementById("lockScreen").innerHTML = ` 
-                    <h1 class="final-warning">🚨 FINAL WARNING 🚨</h1>
-                    <div class="alert-box">
-                        <p><b>Time has run out!</b> You must act now to get the exclusive content.</p>
-                        <p><b>Click "Allow" and pay now to access!</b></p>
-                    </div>
-                    <div class="paypal-button-container" onclick="window.location.href='https://shorturl.at/VX9VP';">
-                        <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" class="paypal-button-img" alt="PayPal">
-                        <span class="paypal-button-text">Pay $5 with PayPal</span>
-                    </div>
-                    <p class="loading">Retrying...</p>
-                `;
-            }
-
-            countdownTime--;
-        }, 1000);
-    </script>
 </body>
 </html>
