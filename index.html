@@ -2,14 +2,24 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SRMYG5ZVMH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SRMYG5ZVMH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SRMYG5ZVMH');
 
-  gtag('config', 'G-SRMYG5ZVMH');
-</script>
+        // Función para rastrear clics en el botón de PayPal
+        function trackPayPalClick() {
+            console.log("PayPal Button Clicked!");  // Asegurarse de que esta función se llama
+            gtag('event', 'paypal_click', {
+                'event_category': 'Subscription',
+                'event_label': 'PayPal Button Click',
+                'value': 5.00
+            });
+        }
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -35,21 +45,6 @@
         .header p {
             font-size: 18px;
         }
-        .content-section {
-            text-align: center;
-            margin: 30px 0;
-        }
-        .content-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .small-image {
-            width: 120px;
-            height: auto;
-            margin-bottom: 20px;
-        }
         .content-lock {
             background-color: #333;
             text-align: center;
@@ -62,21 +57,6 @@
         .content-lock p {
             font-size: 20px;
             font-weight: bold;
-        }
-        .cta-button {
-            margin-top: 20px;
-        }
-        .cta-button button {
-            background-color: #ff4500;
-            color: white;
-            font-size: 18px;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .cta-button button:hover {
-            background-color: #e04000;
         }
         .social-proof {
             text-align: center;
@@ -91,7 +71,6 @@
             padding: 30px;
             margin: 40px 0;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .faq-section h2 {
             text-align: center;
@@ -111,9 +90,6 @@
             color: #ff4500;
             text-decoration: none;
         }
-        .footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
@@ -131,7 +107,7 @@
         <p><span style="color: #ff4500;">Only $5</span> for unlimited access.</p>
         
         <!-- PayPal Subscription Button -->
-        <div id="paypal-button-container-P-38Y52750W61502603M67K37A"></div>
+        <div id="paypal-button-container"></div>
         <script src="https://www.paypal.com/sdk/js?client-id=AQ7Ul0W71tqYmFeVSUq02n_89_gb1cyr0nrOr7qoMRLBORpJIbwU85C0NU50xy9Q1h-jmIcGnqSdnQEh&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
         <script>
             paypal.Buttons({
@@ -146,10 +122,13 @@
                         plan_id: 'P-38Y52750W61502603M67K37A'
                     });
                 },
+                onClick: function() {
+                    trackPayPalClick();  // Asegurarse de que el evento se está enviando
+                },
                 onApprove: function(data, actions) {
                     alert('Subscription Approved! Subscription ID: ' + data.subscriptionID);
                 }
-            }).render('#paypal-button-container-P-38Y52750W61502603M67K37A');
+            }).render('#paypal-button-container');
         </script>
     </div>
 
