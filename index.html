@@ -3,32 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Exclusive Offer</title>
-    <meta http-equiv="refresh" content="0;url=https://t.slext2.com/341879/3785/0?bo=2753,2754,2755,2756&po=6456&aff_sub5=SF_006OG000004lmDN">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exclusive Access to Premium Content</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #1b1b1b;
-            color: white;
-            text-align: center;
+            background-color: #1c1c1c;
+            color: #fff;
             margin: 0;
             padding: 0;
         }
-        
-        h1 {
-            color: #ffcc00;
-            font-size: 30px;
-            margin-top: 20%;
+        .header {
+            text-align: center;
+            background-color: #ff4500;
+            padding: 30px;
+            color: white;
         }
-
-        p {
-            color: #ff9900;
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header p {
             font-size: 18px;
+        }
+        .content-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .content-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .small-image {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .content-lock {
+            background-color: #333;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+        }
+        .content-lock p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .cta-button {
+            margin-top: 20px;
+        }
+        .cta-button button {
+            background-color: #ff4500;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .cta-button button:hover {
+            background-color: #e04000;
+        }
+        .social-proof {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .social-proof p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .faq-section {
+            background-color: #222;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .faq-section h2 {
+            text-align: center;
+            color: #ff4500;
+            font-size: 24px;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #333;
+            text-align: center;
+            padding: 15px;
+            color: white;
+        }
+        .footer a {
+            color: #ff4500;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Redirecting to Exclusive Offer...</h1>
-    <p>If you are not redirected automatically, <a href="https://t.slext2.com/341879/3785/0?bo=2753,2754,2755,2756&po=6456&aff_sub5=SF_006OG000004lmDN" style="color: #ffcc00;">click here</a>.</p>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Exclusive Access to Premium Adult Content</h1>
+        <p>You're one click away from unlocking content you've been looking for. Act fast for exclusive access!</p>
+    </div>
+
+    <!-- Content Lock -->
+    <div class="content-lock">
+        <p>Unlock the full experience NOW!</p>
+        <p>Only for a limited time, get complete access to all the content you've been waiting for.</p>
+        <p><span style="color: #ff4500;">Only $5</span> for unlimited access.</p>
+        
+        <!-- PayPal Subscription Button -->
+        <div id="paypal-button-container-P-38Y52750W61502603M67K37A"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=AQ7Ul0W71tqYmFeVSUq02n_89_gb1cyr0nrOr7qoMRLBORpJIbwU85C0NU50xy9Q1h-jmIcGnqSdnQEh&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+        <script>
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'subscribe'
+                },
+                createSubscription: function(data, actions) {
+                    return actions.subscription.create({
+                        plan_id: 'P-38Y52750W61502603M67K37A'
+                    });
+                },
+                onApprove: function(data, actions) {
+                    alert('Subscription Approved! Subscription ID: ' + data.subscriptionID);
+                }
+            }).render('#paypal-button-container-P-38Y52750W61502603M67K37A');
+        </script>
+    </div>
+
+    <!-- Social Proof -->
+    <div class="social-proof">
+        <h2>What Our Users Are Saying:</h2>
+        <p>"I’m glad I unlocked the full content. It’s more than I expected!"</p>
+        <p>"Totally worth the price. The quality of content is unmatched!"</p>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <p><strong>How can I unlock the content?</strong></p>
+            <p>Simply click the "Subscribe Now" button, and you will be redirected to PayPal to complete your subscription.</p>
+        </div>
+        <div class="faq-item">
+            <p><strong>What payment methods do you accept?</strong></p>
+            <p>We accept PayPal, credit cards, and cryptocurrency payments.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Exclusive Adult Content. All Rights Reserved.</p>
+        <p><a href="terms-and-conditions.html">Terms & Conditions</a> | <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+
 </body>
 </html>
